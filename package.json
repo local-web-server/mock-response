@@ -1,9 +1,9 @@
 {
-  "name": "local-web-server-mock-response",
+  "name": "lws-mock-response",
   "author": "Lloyd Brookes <75pound@gmail.com>",
   "version": "0.0.0",
   "description": "mock-response",
-  "repository": "https://github.com/local-web-server/mock-response.git",
+  "repository": "https://github.com/lwsjs/mock-response.git",
   "license": "MIT",
   "main": "./lib/mock-response.js",
   "keywords": [],
@@ -15,7 +15,7 @@
     "docs": "jsdoc2md -t jsdoc2md/README.md lib/*.js > README.md; echo"
   },
   "dependencies": {
-    "array-back": "^1.0.3",
+    "array-back": "^1.0.4",
     "koa-mock-response": "0.0.2"
   }
 }
