@@ -5,17 +5,17 @@
   "description": "mock-response",
   "repository": "https://github.com/lwsjs/mock-response.git",
   "license": "MIT",
-  "main": "./lib/mock-response.js",
   "keywords": [],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=7"
   },
   "scripts": {
-    "test": "tape test/*.js",
-    "docs": "jsdoc2md -t jsdoc2md/README.md lib/*.js > README.md; echo"
+    "test": "tape test/*.js"
   },
   "dependencies": {
     "array-back": "^1.0.4",
-    "koa-mock-response": "0.0.2"
+    "koa-mock-response": "0.0.2",
+    "load-module": "^0.2.3",
+    "reduce-flatten": "^1.0.1"
   }
 }
