@@ -27,30 +27,12 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
           return loadModule(mockPath)
         })
         .reduce(flatten)
-      return mocks.map(mock => {
+      return arrayify(mocks).map(mock => {
         this.view.write('mock.added', {
           route: mock.route,
           responses: mock.responses
         })
-        mockResponse(mock.route, mock.responses)
-      })
-    } else {
-      const mocks = arrayify(options.mocks)
-      return mocks.map(mock => {
-        if (mock.module) {
-          const modulePath = path.resolve(path.join(options.directory || process.cwd(), mock.module))
-          mock.responses = require(modulePath)
-        }
-
-        if (mock.responses) {
-          return mockResponse(mock.route, mock.responses)
-        } else if (mock.response) {
-          mock.target = {
-            request: mock.request,
-            response: mock.response
-          }
-          return mockResponse(mock.route, mock.target)
-        }
+        return mockResponse(mock.route, mock.responses)
       })
     }
   }

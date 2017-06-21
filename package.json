@@ -10,7 +10,7 @@
     "node": ">=7"
   },
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "test-runner test.js"
   },
   "dependencies": {
     "array-back": "^1.0.4",
