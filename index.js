@@ -6,7 +6,7 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
   optionDefinitions () {
     return [
       {
-        name: 'mock.modules',
+        name: 'mocks',
         multiple: true,
         typeLabel: '[underline]{file}',
         description: 'Mock response module'
@@ -20,18 +20,15 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
     const mockResponse = require('koa-mock-response')
     const loadModule = require('load-module')
 
-    if (options.mockModules && options.mockModules.length) {
+    if (options.mocks && options.mocks.length) {
       const flatten = require('reduce-flatten')
-      const mocks = options.mockModules
+      const mocks = options.mocks
         .map(mockPath => {
-          return loadModule(mockPath)
+          return typeof mockPath === 'string' ? loadModule(mockPath) : mockPath
         })
         .reduce(flatten)
+      this.emit('verbose', 'middleware.mock-response.config', { mocks })
       return arrayify(mocks).map(mock => {
-        this.view.write('mock.added', {
-          route: mock.route,
-          responses: mock.responses
-        })
         return mockResponse(mock.route, mock.responses)
       })
     }
