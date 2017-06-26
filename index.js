@@ -1,6 +1,6 @@
 module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
   description () {
-    return 'Mock a Rest API or any backend service.'
+    return 'Mock a response for any given request.'
   }
 
   optionDefinitions () {
@@ -8,7 +8,7 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
       {
         name: 'mocks',
         multiple: true,
-        typeLabel: '[underline]{file}',
+        typeLabel: '[underline]{file} [underline]{...}',
         description: 'Mock response module'
       }
     ]
