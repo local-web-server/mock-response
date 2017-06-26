@@ -9,7 +9,7 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
         name: 'mocks',
         multiple: true,
         typeLabel: '[underline]{file} [underline]{...}',
-        description: 'Mock response module'
+        description: 'One or more Mock Response modules.'
       }
     ]
   }
