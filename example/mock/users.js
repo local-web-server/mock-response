@@ -1,4 +1,8 @@
-const users = require('./users.json')
+const users = [
+  { "id": 1, "name": "Lloyd", "age": 40, "nationality": "English" },
+  { "id": 2, "name": "Mona", "age": 34, "nationality": "Palestinian" },
+  { "id": 3, "name": "Francesco", "age": 24, "nationality": "Italian" }
+]
 
 /* responses for /users */
 const mocks = [
