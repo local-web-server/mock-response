@@ -20,15 +20,16 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
     const mockResponse = require('koa-mock-response')
     const loadModule = require('load-module')
 
-    if (options.mocks && options.mocks.length) {
+    let mocks = arrayify(options.mocks)
+    if (mocks && mocks.length) {
       const flatten = require('reduce-flatten')
-      const mocks = options.mocks
+      mocks = mocks
         .map(mockPath => {
           return typeof mockPath === 'string' ? loadModule(mockPath) : mockPath
         })
-        .reduce(flatten)
+        .reduce(flatten, [])
       this.emit('verbose', 'middleware.mock-response.config', { mocks })
-      return arrayify(mocks).map(mock => {
+      return mocks.map(mock => {
         return mockResponse(mock.route, mock.responses)
       })
     }
