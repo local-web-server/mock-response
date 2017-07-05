@@ -29,7 +29,17 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
         })
         .reduce(flatten, [])
       this.emit('verbose', 'middleware.mock-response.config', { mocks })
-      return mocks.map(mock => {
+
+      return mocks.map(m => {
+        const MockBase = require('./mock-base')
+        const Mock = m(MockBase)
+        let mock = new Mock()
+        mock = mock.mock()
+        // const request = mock.request()
+        // const response = {
+        //   request,
+        //   response: mock.response()
+        // }
         return mockResponse(mock.route, mock.responses)
       })
     }
