@@ -35,11 +35,6 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
         const Mock = m(MockBase)
         let mock = new Mock()
         mock = mock.mock()
-        // const request = mock.request()
-        // const response = {
-        //   request,
-        //   response: mock.response()
-        // }
         return mockResponse(mock.route, mock.responses)
       })
     }
