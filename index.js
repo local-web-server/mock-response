@@ -28,15 +28,24 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
           return typeof mockPath === 'string' ? loadModule(mockPath) : mockPath
         })
         .reduce(flatten, [])
-      this.emit('verbose', 'middleware.mock-response.config', { mocks })
 
-      return mocks.map(m => {
-        const MockBase = require('./mock-base')
-        const Mock = m(MockBase)
-        let mock = new Mock()
-        mock = mock.mock()
-        return mockResponse(mock.route, mock.responses)
-      })
+      const mockInstances = mocks
+        .map(mockModule => {
+          debugger
+          const MockBase = require('./mock-base')
+          const Mock = mockModule(MockBase)
+          let mock = new Mock()
+          this.propagate(mock)
+          return mock
+        })
+      this.emit('verbose', 'middleware.mock-response.config', { mocks: mockInstances })
+
+      return mockInstances
+        .map(mock => {
+          const mockResponses = arrayify(mock.mock())
+          return mockResponses.map(mock => mockResponse(mock.route, mock.responses))
+        })
+        .reduce(flatten, [])
     }
   }
 }

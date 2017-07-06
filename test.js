@@ -8,17 +8,22 @@ const a = require('assert')
 runner.test('simple', async function () {
   const port = 8000 + this.index
   const lws = new Lws()
+  const Mock = MockBase => class extends MockBase {
+    mock () {
+      return [
+        {
+          route: '/one',
+          responses: [
+            { response: { body: 'one' } }
+          ]
+        }
+      ]
+    }
+  }
   const server = lws.create({
     port,
     stack: MockResponse,
-    mocks: [
-      {
-        route: '/one',
-        responses: [
-          { response: { body: 'one' } }
-        ]
-      }
-    ]
+    mocks: Mock
   })
   const response = await request(`http://localhost:${port}/one`)
   server.close()
