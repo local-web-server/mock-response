@@ -9,7 +9,7 @@ runner.test('simple', async function () {
   const port = 8000 + this.index
   const lws = new Lws()
   const Mock = MockBase => class extends MockBase {
-    mock () {
+    mocks () {
       return [
         {
           route: '/one',
