@@ -42,7 +42,7 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
 
       return mockInstances
         .map(mock => {
-          const mockResponses = arrayify(mock.mock())
+          const mockResponses = arrayify(mock.mocks())
           return mockResponses.map(mock => mockResponse(mock.route, mock.responses))
         })
         .reduce(flatten, [])
