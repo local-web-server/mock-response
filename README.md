@@ -6,7 +6,7 @@
 
 # mock-response
 
-Middleware adding mock responses to lws. For usage instructions, see [here](https://github.com/lwsjs/local-web-server/wiki/How-to-mock-a-REST-API,-web-service-or-any-response).
+Middleware adding mock responses to lws. For usage instructions, see [here](https://github.com/lwsjs/local-web-server/wiki/).
 
 * * *
 
