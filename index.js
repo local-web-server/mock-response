@@ -31,7 +31,6 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
 
       const mockInstances = mocks
         .map(mockModule => {
-          debugger
           const MockBase = require('./mock-base')
           const Mock = mockModule(MockBase)
           let mock = new Mock()

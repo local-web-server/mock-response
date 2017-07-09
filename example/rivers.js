@@ -1,6 +1,5 @@
 module.exports = MockBase => class MockRivers extends MockBase {
   mocks () {
-    this.emit('verbose', 'HELLO', 'MUM')
     return {
       route: '/rivers',
       responses: [
