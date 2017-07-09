@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "array-back": "^2.0.0",
-    "koa-mock-response": "0.1.0",
+    "koa-mock-response": "0.2.0",
     "load-module": "^0.2.3",
     "reduce-flatten": "^1.0.1"
   },

@@ -4,47 +4,45 @@ const users = [
   { "id": 3, "name": "Francesco", "age": 24, "nationality": "Italian" }
 ]
 
-/* responses for /users/:id */
-const mocks = [
-  {
-    route: "/users/:id",
-    responses: [
-      /* don't support POST here */
-      { request: { method: 'POST' }, response: { status: 400 } },
-
-      /* for GET requests, return a particular user */
+module.exports = MockBase => class MockUsers extends MockBase {
+  mocks () {
+    return [
       {
-        name: 'GET user',
-        request: { method: 'GET' },
-        response: function (ctx, id) {
-          ctx.body = users.find(user => user.id === Number(id))
-        }
-      },
+        route: "/users/:id",
+        responses: [
+          /* no support for POST on this route */
+          { request: { method: 'POST' }, response: { status: 400 } },
 
-      /* for PUT requests, update the record */
-      {
-        name: 'PUT user',
-        request: { method: 'PUT' },
-        response: function (ctx, id) {
-          const updatedUser = ctx.request.body
-          const existingUserIndex = users.findIndex(user => user.id === Number(id))
-          users.splice(existingUserIndex, 1, updatedUser)
-          ctx.status = 200
-        }
-      },
+          /* for GET requests, return a particular user */
+          {
+            request: { method: 'GET' },
+            response: (ctx, id) => {
+              ctx.body = users.find(user => user.id === Number(id))
+            }
+          },
 
-      /* DELETE request: remove the record */
-      {
-        name: 'DELETE user',
-        request: { method: 'DELETE' },
-        response: function (ctx, id) {
-          const existingUserIndex = users.findIndex(user => user.id === Number(id))
-          users.splice(existingUserIndex, 1)
-          ctx.status = 200
-        }
+          /* for PUT requests, update the record */
+          {
+            request: { method: 'PUT', is: 'json', accepts: 'json' },
+            response: (ctx, id) => {
+              const updatedUser = ctx.request.body
+              const existingUserIndex = users.findIndex(user => user.id === Number(id))
+              users.splice(existingUserIndex, 1, updatedUser)
+              ctx.status = 204
+            }
+          },
+
+          /* DELETE request: remove the record */
+          {
+            request: { method: 'DELETE' },
+            response: (ctx, id) => {
+              const existingUserIndex = users.findIndex(user => user.id === Number(id))
+              users.splice(existingUserIndex, 1)
+              ctx.status = 204
+            }
+          }
+        ]
       }
     ]
   }
-]
-
-module.exports = mocks
+}
