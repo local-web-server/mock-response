@@ -39,6 +39,12 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
         })
       this.emit('verbose', 'middleware.mock-response.config', { mocks: mockInstances })
 
+      const usage = require('lws/lib/usage')
+      for (const mock of mockInstances) {
+        usage.event('mocks', mock.constructor.name, { hitParams: { cd: 'listen' } })
+      }
+
+      /* return an array of middleware */
       return mockInstances
         .map(mock => {
           const mockResponses = arrayify(mock.mocks(options))
