@@ -10,4 +10,4 @@ Middleware adding mock responses to lws. For usage instructions, see [here](http
 
 * * *
 
-&copy; 2017 Lloyd Brookes <75pound@gmail.com>.
+&copy; 2016-18 Lloyd Brookes <75pound@gmail.com>.
