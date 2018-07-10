@@ -4,8 +4,6 @@ const Lws = require('lws')
 const request = require('req-then')
 const runner = new TestRunner()
 const a = require('assert')
-const usage = require('lws/lib/usage')
-usage.disable()
 
 runner.test('simple', async function () {
   const port = 8000 + this.index

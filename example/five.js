@@ -1,5 +1,5 @@
 module.exports = MockBase => class Five extends MockBase {
-  mock () {
+  mocks () {
     return [
       {
         route: "/",

@@ -25,7 +25,7 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
       const flatten = require('reduce-flatten')
       mocks = mocks
         .map(mockPath => {
-          return typeof mockPath === 'string' ? loadModule(mockPath) : mockPath
+          return typeof mockPath === 'string' ? loadModule(mockPath, { paths: '.' }) : mockPath
         })
         .reduce(flatten, [])
 
@@ -38,11 +38,6 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
           return mock
         })
       this.emit('verbose', 'middleware.mock-response.config', { mocks: mockInstances })
-
-      const usage = require('lws/lib/usage')
-      for (const mock of mockInstances) {
-        usage.event('mocks', mock.constructor.name, { hitParams: { cd: 'listen' } })
-      }
 
       /* return an array of middleware */
       return mockInstances
