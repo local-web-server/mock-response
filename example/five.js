@@ -1,4 +1,4 @@
-module.exports = MockBase => class Five extends MockBase {
+class Five {
   mocks () {
     return [
       {
@@ -58,3 +58,5 @@ module.exports = MockBase => class Five extends MockBase {
     ]
   }
 }
+
+module.exports = Five

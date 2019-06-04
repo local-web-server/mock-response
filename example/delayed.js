@@ -1,4 +1,4 @@
-module.exports = MockBase => class MyMockModule extends MockBase {
+class Delayed {
   mocks (options) {
     return [
       {
@@ -19,3 +19,5 @@ module.exports = MockBase => class MyMockModule extends MockBase {
     ]
   }
 }
+
+module.exports = Delayed

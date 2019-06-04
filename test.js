@@ -1,14 +1,14 @@
-const TestRunner = require('test-runner')
+const Tom = require('test-runner').Tom
 const MockResponse = require('./')
 const Lws = require('lws')
-const request = require('req-then')
-const runner = new TestRunner()
+const fetch = require('node-fetch')
 const a = require('assert')
 
-runner.test('simple', async function () {
+const tom = module.exports = new Tom('mock')
+
+tom.test('simple', async function () {
   const port = 8000 + this.index
-  const lws = new Lws()
-  const Mock = MockBase => class extends MockBase {
+  class Mock {
     mocks () {
       return [
         {
@@ -20,13 +20,14 @@ runner.test('simple', async function () {
       ]
     }
   }
-  const server = lws.listen({
+  const lws = Lws.create({
     port,
     stack: MockResponse,
     mocks: Mock
   })
-  const response = await request(`http://localhost:${port}/one`)
-  server.close()
-  a.strictEqual(response.res.statusCode, 200)
-  a.strictEqual(response.data.toString(), 'one')
+  const response = await fetch(`http://localhost:${port}/one`)
+  lws.server.close()
+  a.strictEqual(response.status, 200)
+  const body = await response.text()
+  a.strictEqual(body, 'one')
 })

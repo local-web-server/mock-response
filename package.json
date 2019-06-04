@@ -11,20 +11,23 @@
     "response"
   ],
   "engines": {
-    "node": ">=7.6"
+    "node": ">=8"
   },
   "scripts": {
     "test": "test-runner test.js"
   },
   "dependencies": {
-    "array-back": "^2.0.0",
+    "array-back": "^3.1.0",
     "koa-mock-response": "0.2.0",
-    "load-module": "^1.0.0",
+    "load-module": "^2.0.0",
     "reduce-flatten": "^2.0.0"
   },
   "devDependencies": {
-    "lws": "^1.2.8",
-    "req-then": "^0.6.4",
-    "test-runner": "^0.5.0"
-  }
+    "lws": "^2.0.0-8",
+    "node-fetch": "^2.6.0",
+    "test-runner": "^0.6.0"
+  },
+  "files": [
+    "index.js"
+  ]
 }

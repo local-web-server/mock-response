@@ -1,4 +1,6 @@
-module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
+const EventEmitter = require('events')
+
+class MockResponse extends EventEmitter {
   description () {
     return 'Mock a response for any given request.'
   }
@@ -30,11 +32,13 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
         .reduce(flatten, [])
 
       const mockInstances = mocks
-        .map(mockModule => {
-          const MockBase = require('./mock-base')
-          const Mock = mockModule(MockBase)
+        .map(Mock => {
           let mock = new Mock()
-          this.propagate(mock)
+          if (mock.on) {
+            mock.on('verbose', (key, value) => {
+              this.emit('verbose', key, value)
+            })
+          }
           return mock
         })
       this.emit('verbose', 'middleware.mock-response.config', { mocks: mockInstances })
@@ -49,3 +53,5 @@ module.exports = MiddlewareBase => class MockResponse extends MiddlewareBase {
     }
   }
 }
+
+module.exports = MockResponse
