@@ -13,7 +13,7 @@ Imagine the network is down or you're working offline, proxied requests to `http
 Trivial example - respond to a request for `/rivers` with some JSON. Save the following Javascript in a file named `example-mocks.js`.
 
 ```js
-module.exports = MockBase => class MockRivers extends MockBase {
+class MockRivers {
   mocks () {
     return {
       route: '/rivers',
