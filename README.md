@@ -66,6 +66,12 @@ $ curl http://127.0.0.1:8000/rivers
 ]
 ```
 
+Adds the following options to lws.
+
+```
+--mocks file ...   One or more modules exporting Mock Responses.
+```
+
 See [the tutorials](https://github.com/lwsjs/local-web-server/wiki/How-to-create-a-mock-response) for more information and examples about mock responses.
 
 * * *
