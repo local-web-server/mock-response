@@ -12,21 +12,21 @@
     "response"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
     "test": "test-runner test.js"
   },
   "dependencies": {
-    "array-back": "^3.1.0",
-    "koa-mock-response": "0.2.0",
-    "load-module": "^2.0.1",
-    "reduce-flatten": "^2.0.0"
+    "array-back": "^4.0.1",
+    "koa-mock-response": "1.0.0",
+    "load-module": "^3.0.0",
+    "reduce-flatten": "^3.0.0"
   },
   "devDependencies": {
-    "lws": "^2.0.0",
+    "lws": "^2.0.8",
     "node-fetch": "^2.6.0",
-    "test-runner": "^0.6.0"
+    "test-runner": "^0.8.13"
   },
   "files": [
     "index.js"
